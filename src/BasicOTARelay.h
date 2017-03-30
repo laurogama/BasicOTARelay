@@ -22,6 +22,7 @@
 /*DEFINES*/
 #define MIN_VALUE   0
 #define MAX_VALUE   1024
+#define CLIENT_ID "client-1c6adc"         // Client ID to send to the broker
 /*INCLUDES*/
 #include <ESP8266WiFi.h>
 #include <ESP8266mDNS.h>
@@ -29,6 +30,19 @@
 #include <ArduinoOTA.h>
 #include <PubSubClient.h>
 /*VARIABLES*/
+/* WiFi Settings */
+const char* ssid     = "Salcomp_sys";
+const char* password = "salcomp@2016";
+
+/* Sonoff Outputs */
+const int motorSpeed = D1;  // Active high
+const int motorDir = D3;
+const int ledPin   = 13;  // Active low
+
+/* MQTT Settings */
+const char* mqttTopic = "/test/relay";   // MQTT topic
+IPAddress broker(192, 168, 1, 111);       // Address of the MQTT broker
+
 /*PROTOTYPES*/
 
 void handlePayload(byte * payload, int length);

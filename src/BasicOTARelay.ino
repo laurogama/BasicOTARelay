@@ -9,28 +9,15 @@
 
 #include "BasicOTARelay.h"
 
-/* WiFi Settings */
-const char* ssid     = "Salcomp_sys";
-const char* password = "salcomp@2016";
-
-/* Sonoff Outputs */
-const int motorSpeed = D1;  // Active high
-const int motorDir = D3;
-const int ledPin   = 13;  // Active low
-
-/* MQTT Settings */
-const char* mqttTopic = "/test/relay";   // MQTT topic
-IPAddress broker(192,168,1,111);          // Address of the MQTT broker
-#define CLIENT_ID "client-1c6adc"         // Client ID to send to the broker
-void handlePayload(byte * payload, length){
+void handlePayload(byte * payload, int length){
     String command="";
-    for (int i=0; i<length, i++){
-        if (isDigit(payload)){
-            command+=(char)payload;
-        }
+    for (int i=0; i<length; i++){
+
+            command+=payload;
+
     }
     if(command.toInt()>MIN_VALUE && command.toInt()<MAX_VALUE){
-        analogWrite(command.toInt());
+        analogWrite(motorSpeed, command.toInt());
     }
     /*// Examine only the first character of the message*/
     /*if(payload[0] == 49)              // Message "1" in ASCII (turn outputs ON)*/
@@ -124,10 +111,7 @@ void setup() {
     /* Set up the outputs. LED is active-low */
     pinMode(motorDir, OUTPUT);
     pinMode(motorSpeed, OUTPUT);
-    pinMode(relayPin, OUTPUT);
-    digitalWrite(ledPin, HIGH);
-    digitalWrite(relayPin, LOW);
-
+    digitalWrite(motorDir, HIGH);
     /* Prepare MQTT client */
     client.setServer(broker, 1883);
     client.setCallback(callback);
