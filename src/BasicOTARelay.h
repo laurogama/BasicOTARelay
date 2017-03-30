@@ -31,9 +31,6 @@
 #include <PubSubClient.h>
 #include "ssid_config.h"
 /*VARIABLES*/
-/* WiFi Settings */
-const char* ssid     = "Salcomp_sys";
-const char* password = "salcomp@2016";
 
 /* Sonoff Outputs */
 const int motorSpeed = D1;  // Active high
