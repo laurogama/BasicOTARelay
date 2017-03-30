@@ -29,6 +29,7 @@
 #include <WiFiUdp.h>
 #include <ArduinoOTA.h>
 #include <PubSubClient.h>
+#include "ssid_config.h"
 /*VARIABLES*/
 /* WiFi Settings */
 const char* ssid     = "Salcomp_sys";

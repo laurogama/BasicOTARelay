@@ -11,13 +11,10 @@
 
 void handlePayload(byte * payload, int length){
     String command="";
-    for (int i=0; i<length; i++){
-
-            command+=payload;
-
-    }
-    if(command.toInt()>MIN_VALUE && command.toInt()<MAX_VALUE){
-        analogWrite(motorSpeed, command.toInt());
+    payload[length] = '\0';
+  String s = String((char*)payload);
+    if(s.toInt()>MIN_VALUE && s.toInt()<MAX_VALUE){
+        analogWrite(motorSpeed, s.toInt());
     }
     /*// Examine only the first character of the message*/
     /*if(payload[0] == 49)              // Message "1" in ASCII (turn outputs ON)*/
